@@ -1,4 +1,6 @@
-import os, sys, logging
+import os
+import sys
+import logging
 from dotenv import load_dotenv
 from binance_manager import BinanceManager
 
@@ -11,7 +13,6 @@ api_secret = os.getenv('SECRET_KEY')
 
 # Initialize client
 binanceManager = BinanceManager(api_key, api_secret)
-# client = Client(api_key, api_secret)
 
 # get market depth
-# depth = client.get_order_book(symbol='BNBBTC')bina
+binanceManager.coin("BTCUSD")
