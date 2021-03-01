@@ -15,4 +15,4 @@ api_secret = os.getenv('SECRET_KEY')
 binanceManager = BinanceManager(api_key, api_secret)
 
 # get market depth
-binanceManager.coin("BTCUSD")
+binanceManager.set_coin("BTCUSD")

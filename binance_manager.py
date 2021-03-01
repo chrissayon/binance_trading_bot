@@ -14,4 +14,5 @@ class BinanceManager:
         """
         Set coin to use
         """
-        return self.coin = coin
+        self.coin = coin
+        return self.coin
