@@ -5,7 +5,7 @@ class StockTradingManager:
     def calculate_current_resistance(self, ask_orders):
         """
         Calculate current resistance by looking asks in order book
-        Orders need to be passed in a [Cryptovalue]
+        Orders need to be passed in a [cryptocurrency_value, othercurrency_totalvalue]
         """
         self.weight = 0
         self.resistance_total = 0
