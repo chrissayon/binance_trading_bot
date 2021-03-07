@@ -1,5 +1,6 @@
 import numpy as np
 from binance.client import Client
+from datetime import datetime
 
 default_coin = "BTCUSD"
 
@@ -49,12 +50,14 @@ class BinanceManager:
 
         self.candlestick_data_np = np.array(self.candlestick_data_int)
         self.candlestick_open_time_points = self.candlestick_data_np[:, 0]
+        self.candlestick_datetime_open_time_points = [datetime.fromtimestamp(time/1000) for time in self.candlestick_open_time_points]
         self.candlestick_open_points = self.candlestick_data_np[:, 1]
         self.candlestick_high_points = self.candlestick_data_np[:, 2]
         self.candlestick_low_points = self.candlestick_data_np[:, 3]
         self.candlestick_close_points = self.candlestick_data_np[:, 4]
         self.candlestick_volume_points = self.candlestick_data_np[:, 5]
         self.candlestick_close_time_points = self.candlestick_data_np[:, 6]
+        self.candlestick_datetime_close_time_points = [datetime.fromtimestamp(time/1000) for time in self.candlestick_close_time_points]
         self.candlestick_quote_asset_points = self.candlestick_data_np[:, 7]
         self.candlestick_trade_number_points = self.candlestick_data_np[:, 8]
         self.candlestick_buy_base_asset_volume_points = self.candlestick_data_np[:, 9]
