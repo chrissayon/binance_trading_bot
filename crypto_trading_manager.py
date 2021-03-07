@@ -1,3 +1,5 @@
+import numpy as np
+
 class CryptoTradingManager:
     def __init__(self):
         pass
@@ -35,3 +37,13 @@ class CryptoTradingManager:
         self.support = self.support_total/self.weight
 
         return self.support
+
+    def calculate_trendline(self, time_points, data_points, line_type="straight"):
+        """
+        Calulate resistance trendline by grabbing candlestick data
+        """
+        # if line_type == "strength":
+        self.trend_line = np.polyfit(time_points, data_points, 1, rcond=None, full=False)
+
+        return self.trend_line
+        
