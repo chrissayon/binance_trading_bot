@@ -41,7 +41,7 @@ class CryptoTradingManager:
 
         return self.support
 
-    def calculate_trendline(self, time_points, data_points, line_type="straight"):
+    def calculate_trendline(self, time_points, data_points):
         """
         Calulate resistance trendline by grabbing candlestick data
         """
@@ -52,6 +52,16 @@ class CryptoTradingManager:
 
         return self.trend_line
 
+    def calculate_all_trendline(self, candlestick_data):
+        """
+        Calculate all trendline types (based off binance candlestick data)
+        """
+        self.trendline_open = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_open_points"])
+        self.trendline_close = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_close_points"])
+        self.trendline_high = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_high_points"])
+        self.trendline_low = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_low_points"])
+        self.trendline_volume = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_volume_points"])
+
     def graph_trendline(self):
         """
         Graphout the trendline
@@ -59,7 +69,6 @@ class CryptoTradingManager:
         price = np.poly1d(self.trend_line)
 
         plt.plot(self.time_points, price(self.time_points), label="trendline")
-        # plt.plot(self.time_points, self.data_points, label="high points")
         plt.draw()
         plt.ioff()
         plt.title("y=%.6fx+%.6f"%(self.trend_line[0],self.trend_line[1])) 
@@ -77,5 +86,12 @@ class CryptoTradingManager:
             close=close_data
         )]
 
-        fig = go.Figure(candlestick_data)
-        fig.show()
+        line_data = [go.Scatter(
+            x=dates, 
+            y=high_data,
+            mode="lines"
+        )]
+
+        # fig = go.Figure(candlestick_data)
+        # fig.add_traces(line_data)
+        # fig.show()
