@@ -64,4 +64,14 @@ class BinanceManager:
         self.candlestick_buy_quote_asset_volume_points = self.candlestick_data_np[:, 10]
         self.candlestick_ignored_points = self.candlestick_data_np[:, 11]
         
+        self.candlestick_dict = {
+            "candlestick_datetime_open_time_points": self.candlestick_open_time_points,
+            "candlestick_open_points": self.candlestick_open_points,
+            "candlestick_high_points": self.candlestick_high_points,
+            "candlestick_low_points": self.candlestick_low_points,
+            "candlestick_close_points": self.candlestick_close_points,
+            "candlestick_volume_points": self.candlestick_volume_points,
+            "candlestick_datetime_close_time_points": self.candlestick_datetime_close_time_points,
+        }
+
         return self.candlestick_data_int
