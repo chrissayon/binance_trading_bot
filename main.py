@@ -15,4 +15,9 @@ api_secret = os.getenv('SECRET_KEY')
 binance_manager = BinanceManager(api_key, api_secret)
 
 # get market depth
-binance_manager.set_coin("BTCUSD")
+binance_manager.set_coin("DOGEAUD")
+
+# get order book
+order_book = binance_manager.get_order_book()
+print(binance_manager.order_book_asks)
+print(binance_manager.order_book_bids)
