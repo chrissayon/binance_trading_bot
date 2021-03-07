@@ -85,13 +85,30 @@ class CryptoTradingManager:
             low=low_data,
             close=close_data
         )]
+        
+        trendline_high_flatten = np.poly1d(self.trendline_high_equation)
+        trendline_low_flatten = np.poly1d(self.trendline_low_equation)
+        trendline_volume_flatten = np.poly1d(self.trendline_volume_equation)
 
-        line_data = [go.Scatter(
+        trendline_high_data = trendline_high_flatten(dates)
+        trendline_low_data = trendline_low_flatten(dates)
+        trendline_volume_data = trendline_volume_flatten(dates)
+
+        figure_trendline_high = [go.Scatter(
             x=dates, 
-            y=high_data,
-            mode="lines"
+            y=trendline_high_data,
+            mode="lines",
+            name="High data trendline"
         )]
 
-        # fig = go.Figure(candlestick_data)
-        # fig.add_traces(line_data)
-        # fig.show()
+        figure_trendline_low = [go.Scatter(
+            x=dates,
+            y=trendline_low_data,
+            mode="lines",
+            name="High data trendline_low_data"
+        )]
+
+        fig = go.Figure(candlestick_data)
+        fig.add_traces(figure_trendline_high)
+        fig.add_traces(figure_trendline_low)
+        fig.show()

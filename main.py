@@ -39,9 +39,9 @@ binance_instance.set_coin("DOGEAUD")
 
 
 # get candlestick data
-candlestick_data = binance_instance.get_candlestick_data(3)
+candlestick_data = binance_instance.get_candlestick_data(50)
 
-# print(binance_instance.candlestick_open_time_points)
+print(binance_instance.candlestick_open_time_points)
 # print(binance_instance.candlestick_high_points)
 
 trend_line = cypto_trading_instance.calculate_trendline(
@@ -50,6 +50,16 @@ trend_line = cypto_trading_instance.calculate_trendline(
 )
 # print(cypto_trading_instance.trend_line)
 
-cypto_trading_instance.graph_trendline()
+cypto_trading_instance.calculate_all_trendline(binance_instance.candlestick_dict)
+
+# cypto_trading_instance.graph_trendline()
+cypto_trading_instance.graph_candlesticks(
+    binance_instance.candlestick_open_time_points,
+    binance_instance.candlestick_open_points,
+    binance_instance.candlestick_high_points,
+    binance_instance.candlestick_low_points,
+    binance_instance.candlestick_close_points,
+)
+
 
 
