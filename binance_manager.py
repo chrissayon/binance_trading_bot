@@ -29,9 +29,9 @@ class BinanceManager:
             'Value of number was {}'.format(number_of_records))
         
         self.order_book = self.binance_client.get_order_book(symbol=self.coin, limit=number_of_records)
-        self.order_book_bids = self.order_book['bids']
-        self.order_book_asks = self.order_book['asks']
-        self.order_book_update_id = self.order_book['lastUpdateId']
+        self.order_book_bids = [list(map(float, ask)) for ask in self.order_book['bids']]
+        self.order_book_asks = [list(map(float, ask)) for ask in self.order_book['asks']]
+        self.order_book_update_id = [int(self.order_book['lastUpdateId'])]
         return self.order_book
 
     def get_candlestick_data(self, number_of_candlesticks):
