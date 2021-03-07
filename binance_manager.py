@@ -1,3 +1,4 @@
+import numpy as np
 from binance.client import Client
 
 default_coin = "BTCUSD"
@@ -38,10 +39,26 @@ class BinanceManager:
         """
         Get candle stick data 
         """
-        self.candlestick_data = self.binance_client.get_klines(
+        self.candlestick_data_raw = self.binance_client.get_klines(
             symbol = self.coin, 
             interval = self.binance_client.KLINE_INTERVAL_12HOUR,
             limit = number_of_candlesticks
         )
 
-        return self.candlestick_data
+        self.candlestick_data_int = [list(map(float, ask)) for ask in self.candlestick_data_raw]
+
+        self.candlestick_data_np = np.array(self.candlestick_data_int)
+        self.candlestick_open_time_points = self.candlestick_data_np[:, 0]
+        self.candlestick_open_points = self.candlestick_data_np[:, 1]
+        self.candlestick_high_points = self.candlestick_data_np[:, 2]
+        self.candlestick_low_points = self.candlestick_data_np[:, 3]
+        self.candlestick_close_points = self.candlestick_data_np[:, 4]
+        self.candlestick_volume_points = self.candlestick_data_np[:, 5]
+        self.candlestick_close_time_points = self.candlestick_data_np[:, 6]
+        self.candlestick_quote_asset_points = self.candlestick_data_np[:, 7]
+        self.candlestick_trade_number_points = self.candlestick_data_np[:, 8]
+        self.candlestick_buy_base_asset_volume_points = self.candlestick_data_np[:, 9]
+        self.candlestick_buy_quote_asset_volume_points = self.candlestick_data_np[:, 10]
+        self.candlestick_ignored_points = self.candlestick_data_np[:, 11]
+        
+        return self.candlestick_data_int
