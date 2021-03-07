@@ -12,7 +12,7 @@ api_key = os.getenv('API_KEY')
 api_secret = os.getenv('SECRET_KEY')
 
 # Initialize client
-binanceManager = BinanceManager(api_key, api_secret)
+binance_manager = BinanceManager(api_key, api_secret)
 
 # get market depth
-binanceManager.set_coin("BTCUSD")
+binance_manager.set_coin("BTCUSD")
