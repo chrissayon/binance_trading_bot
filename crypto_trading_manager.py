@@ -48,7 +48,7 @@ class CryptoTradingManager:
         self.time_points = time_points
         self.data_points = data_points
 
-        self.trend_line = np.polyfit(self.time_points, self.data_points, 1)
+        self.trend_line = np.polyfit(self.time_points, self.data_points, 7)
 
         return self.trend_line
 
@@ -98,14 +98,14 @@ class CryptoTradingManager:
             x=dates, 
             y=trendline_high_data,
             mode="lines",
-            name="High data trendline"
+            name="High Value trendline"
         )]
 
         figure_trendline_low = [go.Scatter(
             x=dates,
             y=trendline_low_data,
             mode="lines",
-            name="High data trendline_low_data"
+            name="Low Value Trendline"
         )]
 
         fig = go.Figure(candlestick_data)
