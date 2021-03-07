@@ -1,4 +1,4 @@
-class StockTradingManager:
+class CryptoTradingManager:
     def __init__(self):
         pass
         
