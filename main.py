@@ -18,6 +18,6 @@ binance_manager = BinanceManager(api_key, api_secret)
 binance_manager.set_coin("DOGEAUD")
 
 # get order book
-order_book = binance_manager.get_order_book()
+order_book = binance_manager.get_order_book(99)
 print(binance_manager.order_book_asks)
 print(binance_manager.order_book_bids)

@@ -17,11 +17,19 @@ class BinanceManager:
         self.coin = coin
         return self.coin
 
-    def get_order_book(self):
+    def get_order_book(self, number_of_records=100):
         """
         Get order book and split it into bids and asks
         """
-        self.order_book = self.binance_client.get_order_book(symbol=self.coin)
+
+        # CHeck if number of records is in any of the following, otherwise quit function
+        number_error_check = { 5, 10, 20, 50, 100, 500, 1000, 5000 }
+
+        if number_of_records not in number_error_check:
+            raise Exception('Invalid number of records, should be: 5, 10, 20, 50, 100, 500, 1000 or 5000. ' + \
+            'Value of number was {}'.format(number_of_records))
+
+        self.order_book = self.binance_client.get_order_book(symbol=self.coin, limit=number_of_records)
         self.order_book_bids = self.order_book['bids']
         self.order_book_asks = self.order_book['asks']
         self.order_book_update_id = self.order_book['lastUpdateId']
