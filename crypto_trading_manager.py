@@ -64,3 +64,18 @@ class CryptoTradingManager:
         plt.ioff()
         plt.title("y=%.6fx+%.6f"%(self.trend_line[0],self.trend_line[1])) 
         plt.show()
+
+    def graph_candlesticks(self, dates, open_data, high_data, low_data, close_data):
+        """
+        Graphout the candlestick
+        """
+        candlestick_data = [go.Candlestick(
+            x=dates,
+            open=open_data,
+            high=high_data,
+            low=low_data,
+            close=close_data
+        )]
+
+        fig = go.Figure(candlestick_data)
+        fig.show()
