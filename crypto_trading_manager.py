@@ -56,11 +56,11 @@ class CryptoTradingManager:
         """
         Calculate all trendline types (based off binance candlestick data)
         """
-        self.trendline_open = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_open_points"])
-        self.trendline_close = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_close_points"])
-        self.trendline_high = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_high_points"])
-        self.trendline_low = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_low_points"])
-        self.trendline_volume = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_volume_points"])
+        self.trendline_open_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_open_points"])
+        self.trendline_close_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_close_points"])
+        self.trendline_high_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_high_points"])
+        self.trendline_low_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_low_points"])
+        self.trendline_volume_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_volume_points"])
 
     def graph_trendline(self):
         """
