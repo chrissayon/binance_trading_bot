@@ -63,6 +63,38 @@ class CryptoTradingManager:
         self.trendline_low_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_LOW])
         self.trendline_volume_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_VOLUME])
 
+    def calculate_rsi(self, candlestick_data):
+        """
+        Calculate rsi
+        """
+        self.change_up = []
+        self.change_down = []
+
+        for candlestick in candlestick_data:
+            # if candlestick[constants.CANDLESTICK_OPEN] > candlestick[constants.CANDLESTICK_CLOSE]:
+            #     change_up.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
+            #     change_down.append(0)
+            # else:
+            #     change_up.append(0)
+            #     change_down.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
+            if candlestick[1] == candlestick[4]:
+                self.change_up.append(0)
+                self.change_down.append(0)
+                pass
+            elif candlestick[1] > candlestick[4]:
+                self.change_up.append(candlestick[1] - candlestick[4])
+                self.change_down.append(0)
+            else:
+                self.change_up.append(0)
+                self.change_down.append(candlestick[4] - candlestick[1])
+
+        self.change_up_avg = np.average(self.change_up)
+        self.change_down_avg = np.average(self.change_down)
+
+        self.rs_value = (self.change_up_avg/self.change_down_avg)
+        self.rsi = (100 - (100/(1 + self.rs_value)))
+        return self.rsi
+
     def graph_trendline(self):
         """
         Graphout the trendline
