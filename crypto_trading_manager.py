@@ -95,6 +95,29 @@ class CryptoTradingManager:
         self.rsi = (100 - (100/(1 + self.rs_value)))
         return self.rsi
 
+    def localize_rsi_to_coin(self, candlestick_data):
+        """
+        Get the rsi value in terms of the coin
+        """
+        self.max_rsi = 0
+        self.min_rsi = 999999
+
+        for candlestick in candlestick_data:
+            # if candlestick[constants.CANDLESTICK_OPEN] > candlestick[constants.CANDLESTICK_CLOSE]:
+            #     change_up.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
+            #     change_down.append(0)
+            # else:
+            #     change_up.append(0)
+            #     change_down.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
+            if self.max_rsi < candlestick[2]:
+                self.max_rsi = candlestick[2]
+            
+            if self.min_rsi > candlestick[3]:
+                self.min_rsi = candlestick[3]
+        
+        self.rsi_to_coin = self.min_rsi + (self.max_rsi - self.min_rsi) * (self.rsi/100)
+        return self.rsi_to_coin
+
     def graph_trendline(self):
         """
         Graphout the trendline
