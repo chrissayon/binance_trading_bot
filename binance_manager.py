@@ -1,10 +1,11 @@
 import numpy as np
+import constants
 from binance.client import Client
 from datetime import datetime
 
 default_coin = "BTCUSD"
 
-class BinanceManager:
+class BinanceManager: 
     def __init__(self, api_key, api_secret):
         """
         Initialize client with api and secret key
@@ -46,8 +47,10 @@ class BinanceManager:
             limit = number_of_candlesticks
         )
 
+        # Create candlestick data 
         self.candlestick_data_int = [list(map(float, ask)) for ask in self.candlestick_data_raw]
 
+        # Separate candlestick data into separate lists
         self.candlestick_data_np = np.array(self.candlestick_data_int)
         self.candlestick_open_time_points = self.candlestick_data_np[:, 0]
         self.candlestick_datetime_open_time_points = [datetime.fromtimestamp(time/1000) for time in self.candlestick_open_time_points]
@@ -64,14 +67,15 @@ class BinanceManager:
         self.candlestick_buy_quote_asset_volume_points = self.candlestick_data_np[:, 10]
         self.candlestick_ignored_points = self.candlestick_data_np[:, 11]
         
+        # Create candlestick dictionary
         self.candlestick_dict = {
-            "candlestick_datetime_open_time_points": self.candlestick_open_time_points,
-            "candlestick_open_points": self.candlestick_open_points,
-            "candlestick_high_points": self.candlestick_high_points,
-            "candlestick_low_points": self.candlestick_low_points,
-            "candlestick_close_points": self.candlestick_close_points,
-            "candlestick_volume_points": self.candlestick_volume_points,
-            "candlestick_datetime_close_time_points": self.candlestick_datetime_close_time_points,
+            constants.CANDLESTICK_DATETIME_OPEN: self.candlestick_open_time_points,
+            constants.CANDLESTICK_OPEN: self.candlestick_open_points,
+            constants.CANDLESTICK_HIGH: self.candlestick_high_points,
+            constants.CANDLESTICK_LOW: self.candlestick_low_points,
+            constants.CANDLESTICK_CLOSE: self.candlestick_close_points,
+            constants.CANDLESTICK_VOLUME: self.candlestick_volume_points,
+            constants.CANDLESTICK_DATETIME_CLOSE: self.candlestick_datetime_close_time_points,
         }
 
         return self.candlestick_data_int

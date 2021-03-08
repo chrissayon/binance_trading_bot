@@ -1,7 +1,8 @@
 import numpy as np
+import constants
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-
+import binance_manager as BinanceManager
 
 class CryptoTradingManager:
     def __init__(self):
@@ -56,11 +57,11 @@ class CryptoTradingManager:
         """
         Calculate all trendline types (based off binance candlestick data)
         """
-        self.trendline_open_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_open_points"])
-        self.trendline_close_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_close_points"])
-        self.trendline_high_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_high_points"])
-        self.trendline_low_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_low_points"])
-        self.trendline_volume_equation = self.calculate_trendline(candlestick_data["candlestick_datetime_open_time_points"], candlestick_data["candlestick_volume_points"])
+        self.trendline_open_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_OPEN])
+        self.trendline_close_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_CLOSE])
+        self.trendline_high_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_HIGH])
+        self.trendline_low_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_LOW])
+        self.trendline_volume_equation = self.calculate_trendline(candlestick_data[constants.CANDLESTICK_DATETIME_OPEN], candlestick_data[constants.CANDLESTICK_VOLUME])
 
     def graph_trendline(self):
         """
