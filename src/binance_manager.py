@@ -43,7 +43,7 @@ class BinanceManager:
         """
         self.candlestick_data_raw = self.binance_client.get_klines(
             symbol = self.coin, 
-            interval = self.binance_client.KLINE_INTERVAL_12HOUR,
+            interval = self.binance_client.KLINE_INTERVAL_1HOUR,
             limit = number_of_candlesticks
         )
 
