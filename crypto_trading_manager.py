@@ -142,29 +142,40 @@ class CryptoTradingManager:
             close=close_data
         )]
         
-        trendline_high_flatten = np.poly1d(self.trendline_high_equation)
-        trendline_low_flatten = np.poly1d(self.trendline_low_equation)
-        trendline_volume_flatten = np.poly1d(self.trendline_volume_equation)
+        # trendline_high_flatten = np.poly1d(self.trendline_high_equation)
+        # trendline_low_flatten = np.poly1d(self.trendline_low_equation)
+        # trendline_volume_flatten = np.poly1d(self.trendline_volume_equation)
 
-        trendline_high_data = trendline_high_flatten(dates)
-        trendline_low_data = trendline_low_flatten(dates)
-        trendline_volume_data = trendline_volume_flatten(dates)
+        # trendline_high_data = trendline_high_flatten(dates)
+        # trendline_low_data = trendline_low_flatten(dates)
+        # trendline_volume_data = trendline_volume_flatten(dates)
 
-        figure_trendline_high = [go.Scatter(
-            x=dates, 
-            y=trendline_high_data,
-            mode="lines",
-            name="High Value trendline"
-        )]
+        # figure_trendline_high = [go.Scatter(
+        #     x=dates, 
+        #     y=trendline_high_data,
+        #     mode="lines",
+        #     name="High Value trendline"
+        # )]
 
-        figure_trendline_low = [go.Scatter(
+        # figure_trendline_low = [go.Scatter(
+        #     x=dates,
+        #     y=trendline_low_data,
+        #     mode="lines",
+        #     name="Low Value Trendline"
+        # )]
+        
+        print(dates.size)
+        rsi_line = [self.rsi_to_coin] * dates.size
+
+        figure_rsi_line = [go.Scatter(
             x=dates,
-            y=trendline_low_data,
+            y=rsi_line,
             mode="lines",
-            name="Low Value Trendline"
+            name="RSI line"
         )]
 
         fig = go.Figure(candlestick_data)
-        fig.add_traces(figure_trendline_high)
-        fig.add_traces(figure_trendline_low)
+        # fig.add_traces(figure_trendline_high)
+        # fig.add_traces(figure_trendline_low)
+        fig.add_traces(figure_rsi_line)
         fig.show()
