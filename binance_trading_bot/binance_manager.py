@@ -1,7 +1,7 @@
 import numpy as np
-import constants
-from binance.client import Client
 from datetime import datetime
+from binance.client import Client
+import binance_trading_bot.constants as constants
 
 default_coin = "BTCUSD"
 
