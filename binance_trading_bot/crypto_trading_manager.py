@@ -42,14 +42,14 @@ class CryptoTradingManager:
 
         return self.support
 
-    def calculate_trendline(self, time_points, data_points):
+    def calculate_trendline(self, time_points, data_points, polynomial):
         """
         Calulate resistance trendline by grabbing candlestick data
         """
         self.time_points = time_points
         self.data_points = data_points
 
-        self.trend_line = np.polyfit(self.time_points, self.data_points, 7)
+        self.trend_line = np.polyfit(self.time_points, self.data_points, polynomial)
 
         return self.trend_line
 
