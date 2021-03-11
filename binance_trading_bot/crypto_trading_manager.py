@@ -8,7 +8,7 @@ class CryptoTradingManager:
     def __init__(self):
         pass
         
-    def calculate_current_resistance(self, ask_orders):
+    def calculate_resistance(self, ask_orders):
         """
         Calculate current resistance by looking asks in order book
         Orders need to be passed in a [[cryptocurrency_value, othercurrency_totalvalue], ...] format
@@ -25,7 +25,7 @@ class CryptoTradingManager:
 
         return self.resistance
 
-    def calculate_current_support(self, bid_orders):
+    def calculate_support(self, bid_orders):
         """
         Calculate current support by looking bids in order book
         Orders need to be passed in a [[cryptocurrency_value, othercurrency_totalvalue], ...] format
