@@ -18,6 +18,20 @@ class TestClassCyptoTradingManager:
 
         assert resistance_data == 1
 
+    def test_calculate_support(self):
+        """
+        Test support function
+        """
+        bid_data = [
+            [1, 1],
+            [1, 1]
+        ]
+
+        support_data = crypto_trading_instance.calculate_support(bid_data)
+
+        assert support_data == 1
+
+
     def test_calculate_trendline(self):
         """
         Test trendline function
