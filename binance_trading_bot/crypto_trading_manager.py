@@ -30,15 +30,15 @@ class CryptoTradingManager:
         Calculate current support by looking bids in order book
         Orders need to be passed in a [[cryptocurrency_value, othercurrency_totalvalue], ...] format
         """
-        self.weight = 0
-        self.support_total = 0
+        weight = 0
+        support_total = 0
 
         #Calculate weighted average
         for bid in bid_orders:
-            self.weight += bid[1]
-            self.support_total += bid[0] * bid[1]
+            weight += bid[1]
+            support_total += bid[0] * bid[1]
 
-        self.support = self.support_total/self.weight
+        self.support = support_total/weight
 
         return self.support
 
