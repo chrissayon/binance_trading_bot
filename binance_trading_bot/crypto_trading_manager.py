@@ -67,31 +67,24 @@ class CryptoTradingManager:
         """
         Calculate rsi
         """
-        self.change_up = []
-        self.change_down = []
+        change_up = []
+        change_down = []
 
         for candlestick in candlestick_data:
-            # if candlestick[constants.CANDLESTICK_OPEN] > candlestick[constants.CANDLESTICK_CLOSE]:
-            #     change_up.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
-            #     change_down.append(0)
-            # else:
-            #     change_up.append(0)
-            #     change_down.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
             if candlestick[1] == candlestick[4]:
-                self.change_up.append(0)
-                self.change_down.append(0)
-                pass
+                change_up.append(0)
+                change_down.append(0)
             elif candlestick[1] > candlestick[4]:
-                self.change_up.append(candlestick[1] - candlestick[4])
-                self.change_down.append(0)
+                change_up.append(candlestick[1] - candlestick[4])
+                change_down.append(0)
             else:
-                self.change_up.append(0)
-                self.change_down.append(candlestick[4] - candlestick[1])
+                change_up.append(0)
+                change_down.append(candlestick[4] - candlestick[1])
 
-        self.change_up_avg = np.average(self.change_up)
-        self.change_down_avg = np.average(self.change_down)
+        change_up_avg = np.average(change_up)
+        change_down_avg = np.average(change_down)
 
-        self.rs_value = (self.change_up_avg/self.change_down_avg)
+        self.rs_value = (change_up_avg/change_down_avg)
         self.rsi = (100 - (100/(1 + self.rs_value)))
         return self.rsi
 
