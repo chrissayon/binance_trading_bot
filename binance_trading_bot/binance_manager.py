@@ -13,6 +13,16 @@ class BinanceManager:
         """
         self.binance_client = Client(api_key, api_secret)
         self.coin = default_coin
+        self.get_limit_rates()
+
+    def get_limit_rates(self):
+        """
+        Get limit rates and set them
+        """
+        self.exchange_info = self.binance_client.get_exchange_info()
+        self.limit_rates = self.exchange_info["rateLimits"]
+        print("Setting limit rates from exchange info")
+        return self.limit_rates
 
     def set_coin(self, coin):
         """
