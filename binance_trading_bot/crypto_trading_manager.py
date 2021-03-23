@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import binance_trading_bot.constants as constants
-import binance_trading_bot.binance_manager as BinanceManager
 
 
 class CryptoTradingManager:
