@@ -5,14 +5,15 @@ import binance_trading_bot.constants as constants
 
 default_coin = "BTCUSD"
 
-class BinanceManager: 
+
+class BinanceManager:
     def __init__(self, api_key, api_secret):
         """
         Initialize client with api and secret key
         """
         self.binance_client = Client(api_key, api_secret)
         self.coin = default_coin
- 
+
     def set_coin(self, coin):
         """
         Set coin to use, else default is BTCUSD
@@ -29,8 +30,8 @@ class BinanceManager:
 
         if number_of_records not in number_error_check:
             raise Exception('Invalid number of records, should be: 5, 10, 20, 50, 100, 500, 1000 or 5000. ' + \
-            'Value of number was {}'.format(number_of_records))
-        
+                            'Value of number was {}'.format(number_of_records))
+
         self.order_book = self.binance_client.get_order_book(symbol=self.coin, limit=number_of_records)
         self.order_book_bids = [list(map(float, ask)) for ask in self.order_book['bids']]
         self.order_book_asks = [list(map(float, ask)) for ask in self.order_book['asks']]
@@ -39,15 +40,15 @@ class BinanceManager:
 
     def get_candlestick_data(self, number_of_candlesticks):
         """
-        Get candle stick data 
+        Get candle stick data
         """
         self.candlestick_data_raw = self.binance_client.get_klines(
-            symbol = self.coin, 
+            symbol = self.coin,
             interval = self.binance_client.KLINE_INTERVAL_1HOUR,
             limit = number_of_candlesticks
         )
 
-        # Create candlestick data 
+        # Create candlestick data
         self.candlestick_data_int = [list(map(float, ask)) for ask in self.candlestick_data_raw]
 
         # Separate candlestick data into separate lists
@@ -66,7 +67,7 @@ class BinanceManager:
         self.candlestick_buy_base_asset_volume_points = self.candlestick_data_np[:, 9]
         self.candlestick_buy_quote_asset_volume_points = self.candlestick_data_np[:, 10]
         self.candlestick_ignored_points = self.candlestick_data_np[:, 11]
-        
+
         # Create candlestick dictionary
         self.candlestick_dict = {
             constants.CANDLESTICK_DATETIME_OPEN: self.candlestick_open_time_points,

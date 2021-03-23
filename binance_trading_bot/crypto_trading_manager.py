@@ -4,10 +4,11 @@ import plotly.graph_objects as go
 import binance_trading_bot.constants as constants
 import binance_trading_bot.binance_manager as BinanceManager
 
+
 class CryptoTradingManager:
     def __init__(self):
         pass
-        
+
     def calculate_resistance(self, ask_orders):
         """
         Calculate current resistance by looking asks in order book
@@ -16,7 +17,7 @@ class CryptoTradingManager:
         weight = 0
         resistance_total = 0
 
-        #Calculate weighted average
+        # Calculate weighted average
         for ask in ask_orders:
             weight += ask[1]
             resistance_total += ask[0] * ask[1]
@@ -33,7 +34,7 @@ class CryptoTradingManager:
         weight = 0
         support_total = 0
 
-        #Calculate weighted average
+        # Calculate weighted average
         for bid in bid_orders:
             weight += bid[1]
             support_total += bid[0] * bid[1]
@@ -104,10 +105,10 @@ class CryptoTradingManager:
             #     change_down.append(candlestick[constants.CANDLESTICK_OPEN] - candlestick[constants.CANDLESTICK_CLOSE])
             if self.max_rsi < candlestick[2]:
                 self.max_rsi = candlestick[2]
-            
+
             if self.min_rsi > candlestick[3]:
                 self.min_rsi = candlestick[3]
-        
+
         self.rsi_to_coin = self.min_rsi + (self.max_rsi - self.min_rsi) * (self.rsi/100)
         return self.rsi_to_coin
 
@@ -120,7 +121,7 @@ class CryptoTradingManager:
         plt.plot(self.time_points, price(self.time_points), label="trendline")
         plt.draw()
         plt.ioff()
-        plt.title("y=%.6fx+%.6f"%(self.trend_line[0],self.trend_line[1])) 
+        plt.title("y=%.6fx+%.6f" % (self.trend_line[0], self.trend_line[1]))
         plt.show()
 
     def graph_candlesticks(self, dates, open_data, high_data, low_data, close_data):
@@ -134,7 +135,7 @@ class CryptoTradingManager:
             low=low_data,
             close=close_data
         )]
-        
+
         # trendline_high_flatten = np.poly1d(self.trendline_high_equation)
         # trendline_low_flatten = np.poly1d(self.trendline_low_equation)
         # trendline_volume_flatten = np.poly1d(self.trendline_volume_equation)
@@ -144,7 +145,7 @@ class CryptoTradingManager:
         # trendline_volume_data = trendline_volume_flatten(dates)
 
         # figure_trendline_high = [go.Scatter(
-        #     x=dates, 
+        #     x=dates,
         #     y=trendline_high_data,
         #     mode="lines",
         #     name="High Value trendline"
@@ -156,7 +157,7 @@ class CryptoTradingManager:
         #     mode="lines",
         #     name="Low Value Trendline"
         # )]
-        
+
         print(dates.size)
         rsi_line = [self.rsi_to_coin] * dates.size
 
