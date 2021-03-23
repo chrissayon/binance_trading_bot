@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 import binance_trading_bot.constants as constants
 
 
-class CryptoTradingManager:
+class TechnicalIndicator:
     def __init__(self):
         pass
 

@@ -1,10 +1,10 @@
 import pytest
-import os,sys,inspect
-from binance_trading_bot.crypto_trading_manager import CryptoTradingManager
+import os, sys, inspect
+from binance_trading_bot.technical_indicators import TechnicalIndicators
 
-crypto_trading_instance = CryptoTradingManager()
+crypto_trading_instance = TechnicalIndicators()
 
-class TestClassCyptoTradingManager:
+class TestTechnicalIndicators:
     def test_calculate_resistance(self):
         """
         Test resistance function
